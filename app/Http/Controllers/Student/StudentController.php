@@ -13,7 +13,7 @@ class StudentController extends Controller
         return view('Formulario');
     }
 
-    //Logica para insertar datos 
+    //Logica para insertar datos
     public function store(StudentRequest $request)
     {
         return "Formulario procesado";

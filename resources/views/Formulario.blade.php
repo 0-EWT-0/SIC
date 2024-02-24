@@ -12,7 +12,13 @@
     @enderror
     <input class="i_matricula_alumno" type="text" name="id_student" placeholder="Matricula">
     <input class="i_correo_alumno" type="text" name="email_student" placeholder="Correo">
+    @error('email_student')
+    <div style="color: red;"> {{$message}}</div>
+    @enderror
     <input class="i_contrasena_alumno" type="text" name="password_student" placeholder="Contrasena">
+    @error('password_student')
+    <div style="color: red;"> {{$message}}</div>
+    @enderror
     <button class="boton_registro" type="submit">Registrar</button>
  </form>
 @endsection
