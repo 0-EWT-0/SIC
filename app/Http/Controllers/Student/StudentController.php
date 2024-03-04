@@ -8,14 +8,10 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index()
-    {
-        return view('Formulario');
+    public function index(){
+        return view('formulario');
     }
-
-    //Logica para insertar datos
-    public function store(StudentRequest $request)
-    {
+    public function store(StudentRequest $request){
         return "Formulario procesado";
     }
 }

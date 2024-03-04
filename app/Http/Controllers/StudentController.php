@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
-
 class StudentController extends Controller
 {
+    /**
+     * Constructor del controlador para aplicar filtros a los métodos.
+     */
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $students=Student::all();
-       return view('Students', compact('students'));
+        /*$students = Student::all();*/
+        $students = Student::paginate(10);
+        return view('Students', compact('students'));
     }
 
     /**
@@ -37,25 +41,36 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        // mosttar detalles de estudiantes
+        // mostrar detalles de estudiantes
+        $student = Student::find($id);
+        return view('show-student', compact('student'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         //mostrar formulario para edita con los datos precargados
+        //show
+        $student = Student::find($id);
+        return view('edit-student', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        //processa esa actualicacin
+        //procesa esa actualizacion
+        $student = Student::find($id);
+        $student->update($request->all());
+        return redirect()->route('estudiantes.index')->with(
+            'notificacion',
+            'Estudiante modificado exitosamente'
+        );
     }
 
     /**
